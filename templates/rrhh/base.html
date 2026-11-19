@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TecnoAndes - RRHH</title>
+  <style>
+    body{font-family:Arial,sans-serif;margin:0;background:#f4f6f8;color:#222}
+    nav{background:#153a5b;color:white;padding:12px 24px}nav a{color:white;margin-right:14px}
+    main{max-width:1100px;margin:24px auto;background:white;padding:24px;border-radius:8px}
+    table{border-collapse:collapse;width:100%}th,td{border:1px solid #ddd;padding:8px;text-align:left}
+    .messages{padding:10px;background:#e8f4ff}.errorlist{color:#b00020}.actions{margin:16px 0}
+    input,select,textarea{padding:8px;margin:4px 0;width:100%;max-width:500px}
+    button{padding:9px 14px;background:#153a5b;color:white;border:0;border-radius:4px}
+  </style>
+</head>
+<body>
+<nav>
+  {% if user.is_authenticated %}
+    <a href="{% url 'dashboard' %}">Inicio</a>
+    <a href="{% url 'marcar_asistencia' %}">Asistencia</a>
+    <a href="{% url 'solicitar_permiso' %}">Solicitar permiso</a>
+    <a href="{% url 'reportes' %}">Reportes</a>
+    <a href="/admin/">Administración</a>
+    <a href="{% url 'logout' %}">Salir</a>
+  {% endif %}
+</nav>
+<main>
+{% if messages %}<div class="messages">{% for message in messages %}<p>{{ message }}</p>{% endfor %}</div>{% endif %}
+{% block content %}{% endblock %}
+</main>
+</body>
+</html>

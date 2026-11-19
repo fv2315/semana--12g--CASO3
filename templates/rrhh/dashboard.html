@@ -1,0 +1,20 @@
+{% extends 'rrhh/base.html' %}
+{% block content %}
+<h1>Panel de Recursos Humanos</h1>
+{% if empleado %}
+<p><b>Empleado:</b> {{ empleado.nombres }} {{ empleado.apellidos }} | <b>Área:</b> {{ empleado.area }}</p>
+<p><b>Vacaciones disponibles:</b> {{ empleado.dias_vacaciones_disponibles }} días</p>
+{% endif %}
+<h2>Permisos</h2>
+<table><thead><tr><th>Empleado</th><th>Tipo</th><th>Fechas</th><th>Estado</th><th>Acción</th></tr></thead>
+<tbody>{% for permiso in permisos %}<tr>
+<td>{{ permiso.empleado }}</td><td>{{ permiso.tipo }}</td><td>{{ permiso.fecha_inicio }} - {{ permiso.fecha_fin }}</td>
+<td>{{ permiso.estado }}</td><td>{% if permiso.estado == 'pendiente' %}
+<form method="post" action="{% url 'resolver_permiso' permiso.id %}" style="display:inline">{% csrf_token %}
+<button name="estado" value="aprobado">Aprobar</button><button name="estado" value="rechazado">Rechazar</button>
+</form>{% endif %}</td></tr>{% empty %}<tr><td colspan="5">Sin permisos.</td></tr>{% endfor %}</tbody></table>
+{% if asistencias.exists %}
+<h2>Mis asistencias</h2><table><thead><tr><th>Fecha</th><th>Entrada</th><th>Salida</th><th>Horas</th><th>Extras</th></tr></thead>
+<tbody>{% for a in asistencias %}<tr><td>{{a.fecha}}</td><td>{{a.entrada|default:"-"}}</td><td>{{a.salida|default:"-"}}</td><td>{{a.horas_trabajadas}}</td><td>{{a.horas_extras}}</td></tr>{% endfor %}</tbody></table>
+{% endif %}
+{% endblock %}

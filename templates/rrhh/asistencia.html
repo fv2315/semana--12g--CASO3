@@ -1,0 +1,9 @@
+{% extends 'rrhh/base.html' %}
+{% block content %}
+<h1>Marcación de asistencia</h1>
+<p>{{ empleado.nombres }} {{ empleado.apellidos }}</p>
+<form method="post" class="actions">{% csrf_token %}
+<button name="tipo" value="entrada">Registrar entrada</button>
+<button name="tipo" value="salida">Registrar salida</button>
+</form>
+{% endblock %}

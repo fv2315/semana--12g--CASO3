@@ -1,0 +1,5 @@
+{% extends 'rrhh/base.html' %}
+{% block content %}
+<h1>Ingreso corporativo - TecnoAndes</h1>
+<form method="post">{% csrf_token %}{{ form.as_p }}<button type="submit">Ingresar</button></form>
+{% endblock %}

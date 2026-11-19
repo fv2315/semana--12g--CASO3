@@ -1,0 +1,7 @@
+{% extends 'rrhh/base.html' %}
+{% block content %}
+<h1>Reporte de asistencia</h1>
+<p><a href="{% url 'exportar_asistencia' %}">Exportar datos como texto</a></p>
+<table><thead><tr><th>Empleado</th><th>Área</th><th>Fecha</th><th>Horas</th><th>Extras</th></tr></thead>
+<tbody>{% for a in asistencias %}<tr><td>{{a.empleado}}</td><td>{{a.empleado.area}}</td><td>{{a.fecha}}</td><td>{{a.horas_trabajadas}}</td><td>{{a.horas_extras}}</td></tr>{% endfor %}</tbody></table>
+{% endblock %}
